@@ -14,10 +14,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author lengo
- */
 public class fVigenere extends javax.swing.JFrame {
 
     /**

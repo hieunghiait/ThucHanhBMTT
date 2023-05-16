@@ -1,6 +1,5 @@
 package TripDes;
 
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -15,21 +14,17 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESedeKeySpec;
 import javax.swing.JOptionPane;
 import java.util.Base64;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
-/**
- *
- * @author sinhvien
- */
-
 public class DESEDE extends javax.swing.JFrame {
 
-    private static final String UNICODE_FORMAT="UTF8";
-    public static final String DESEDE_ENCRYPTION_SCHEME="DESede";
+    private static final String UNICODE_FORMAT = "UTF8";
+    public static final String DESEDE_ENCRYPTION_SCHEME = "DESede";
     private KeySpec myKeySpec;
     private SecretKeyFactory mySecretKeyFactory;
     private Cipher cipher;
@@ -39,35 +34,38 @@ public class DESEDE extends javax.swing.JFrame {
     private String myDecryptionKey;
     private String myDecryptionScheme;
     SecretKey key;
+
     public DESEDE() {
         initComponents();
     }
-    public String encrypt (String unencryptedString){
+
+    public String encrypt(String unencryptedString) {
         String encryptedString = null;
-        try{
-            cipher.init(Cipher.ENCRYPT_MODE,key);
-            byte[] plainText=unencryptedString.getBytes(UNICODE_FORMAT);
-            byte[] encryptedText=cipher.doFinal(plainText);
-          //  BASE64Encoder base64encoder=new BASE64Encoder();
-            encryptedString= Base64.getEncoder().encodeToString(encryptedText);
-            
-        }catch(Exception e){
+        try {
+            cipher.init(Cipher.ENCRYPT_MODE, key);
+            byte[] plainText = unencryptedString.getBytes(UNICODE_FORMAT);
+            byte[] encryptedText = cipher.doFinal(plainText);
+            //  BASE64Encoder base64encoder=new BASE64Encoder();
+            encryptedString = Base64.getEncoder().encodeToString(encryptedText);
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return encryptedString;
     }
-    public String decrypt(String encryptedString){
-        String decryptedText=null;
-        try{
-            cipher.init(Cipher.DECRYPT_MODE,key);
+
+    public String decrypt(String encryptedString) {
+        String decryptedText = null;
+        try {
+            cipher.init(Cipher.DECRYPT_MODE, key);
             //BASE64Decoder base64decoder = new BASE64Decoder();
-            byte[] encryptedText= Base64.getDecoder().decode(encryptedString);
-            byte[] plainText=cipher.doFinal(encryptedText);
-            String a =new String(plainText);
-            System.out.println("chuoi plaintext: "+a);
-            decryptedText=a;
-        
-        }catch(Exception e){
+            byte[] encryptedText = Base64.getDecoder().decode(encryptedString);
+            byte[] plainText = cipher.doFinal(encryptedText);
+            String a = new String(plainText);
+            System.out.println("chuoi plaintext: " + a);
+            decryptedText = a;
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return decryptedText;
@@ -225,75 +223,76 @@ public class DESEDE extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnmahoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmahoaActionPerformed
-        try{
-            myEncryptionKey= txtinputkey.getText();
+        try {
+            myEncryptionKey = txtinputkey.getText();
             myEncryptionScheme = DESEDE_ENCRYPTION_SCHEME;
             keyAsBytes = myEncryptionKey.getBytes(UNICODE_FORMAT);
             myKeySpec = new DESedeKeySpec(keyAsBytes);
             mySecretKeyFactory = SecretKeyFactory.getInstance(myEncryptionScheme);
             cipher = Cipher.getInstance(myEncryptionScheme);
             key = mySecretKeyFactory.generateSecret(myKeySpec);
-            System.out.println("khoa ma hoa k: "+ " "+ key);
-            String plainText=txtplaintext.getText();
+            System.out.println("Khoa ma hoa k: " + " " + key);
+            String plainText = txtplaintext.getText();
             String encrypted = encrypt(plainText);
-            System.out.println("Encrypted value:"+encrypted);
-            txtciphertext.setText(encrypted); 
-        }catch(Exception e){
-            System.out.println("da ma hoa van ban" +e);
+            System.out.println("Encrypted value:" + encrypted);
+            txtciphertext.setText(encrypted);
+        } catch (Exception e) {
+            System.out.println("Da ma hoa van ban" + e);
         }
     }//GEN-LAST:event_btnmahoaActionPerformed
 
     private void btnghifileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnghifileActionPerformed
         try {
-           BufferedWriter bw = null;
-           String filename="D:\\DESEDE.txt";
-           String s=txtciphertext.getText();
-           bw=new BufferedWriter(new FileWriter(filename));
-           bw.write(s);
-           bw.close();
-           JOptionPane.showMessageDialog(null,"Ðã ghi file thành công");
+            BufferedWriter bw = null;
+            String filename = "D:\\DESEDE.txt";
+            String s = txtciphertext.getText();
+            bw = new BufferedWriter(new FileWriter(filename));
+            bw.write(s);
+            bw.close();
+            JOptionPane.showMessageDialog(null, "Da ghi file thanh cong");
         } catch (IOException ex) {
-            Logger.getLogger(DESEDE.class.getName()).log(Level.SEVERE,null,ex);
+            Logger.getLogger(DESEDE.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnghifileActionPerformed
 
     private void btnallshowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnallshowActionPerformed
         try {
             BufferedReader br = null;
-            String filename="D:\\DESEDE.txt";
-            br=new BufferedReader(new FileReader(filename));
-            StringBuffer sb=new StringBuffer();
-            JOptionPane.showMessageDialog(null,"Ðã m? file thành công");
-            char[] ca=new char[5];
-            while(br.ready()){
-                int len=br.read(ca);
-                sb.append(ca,0,len);
+            String filename = "D:\\DESEDE.txt";
+            br = new BufferedReader(new FileReader(filename));
+            StringBuffer sb = new StringBuffer();
+            JOptionPane.showMessageDialog(null, "Da moi file thanh cong");
+            char[] ca = new char[5];
+            while (br.ready()) 
+            {
+                int len = br.read(ca);
+                sb.append(ca, 0, len);
             }
             br.close();
-            System.out.println("D? li?u là: "+" "+sb);
-            String chuoi=sb.toString();
+            String chuoi = sb.toString();
+            System.out.println("Log: " + chuoi);
             txtplaintext.setText(chuoi);
         } catch (IOException ex) {
-            Logger.getLogger(DESEDE.class.getName()).log(Level.SEVERE,null,ex);
+            Logger.getLogger(DESEDE.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnallshowActionPerformed
 
     private void btngiaimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btngiaimaActionPerformed
-        try{
-            myDecryptionKey= txtinputkey.getText();
+        try {
+            myDecryptionKey = txtinputkey.getText();
             myDecryptionScheme = DESEDE_ENCRYPTION_SCHEME;
             keyAsBytes = myDecryptionKey.getBytes(UNICODE_FORMAT);
             myKeySpec = new DESedeKeySpec(keyAsBytes);
-          //  mySecretKeyFactory = SecretKeyFactory.getInstance(myDecryptionScheme);
+            //  mySecretKeyFactory = SecretKeyFactory.getInstance(myDecryptionScheme);
             cipher = Cipher.getInstance(myDecryptionScheme);
             key = mySecretKeyFactory.generateSecret(myKeySpec);
-           // System.out.println("khoa ma hoc k: "+ " "+ key);
-            String plainText=txtciphertext.getText();
+            // System.out.println("khoa ma hoc k: "+ " "+ key);
+            String plainText = txtciphertext.getText();
             String decrypted = decrypt(plainText);
-          //  System.out.println("Decrypted value:"+decrypted);
-            txtciphertext.setText(decrypted); 
-        }catch(Exception e){
-            System.out.println("da giai ma van ban" +e);
+            System.out.println("Gia tri gia ma:"+decrypted);
+            txtplaintext.setText(decrypted);
+        } catch (Exception e) {
+            System.out.println("Da giai ma van ban" + e);
         }
     }//GEN-LAST:event_btngiaimaActionPerformed
 
@@ -335,7 +334,7 @@ public class DESEDE extends javax.swing.JFrame {
                 new DESEDE().setVisible(true);
             }
         });
-    }
+    }                                                                                                   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnallshow;

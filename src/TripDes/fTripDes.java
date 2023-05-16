@@ -124,9 +124,9 @@ public class fTripDes extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(183, 183, 183)
+                        .addGap(131, 131, 131)
                         .addComponent(btnGiaima)
-                        .addGap(78, 78, 78)
+                        .addGap(130, 130, 130)
                         .addComponent(btnAll)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
@@ -362,4 +362,14 @@ public class fTripDes extends javax.swing.JFrame {
     private javax.swing.JTextArea txtMaHoa;
     private javax.swing.JTextArea txtPt;
     // End of variables declaration//GEN-END:variables
+
+    private static class BASE64Decoder {
+
+        public BASE64Decoder() {
+        }
+
+        private byte[] decodeBuffer(String encryptedString) {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
+    }
 }
